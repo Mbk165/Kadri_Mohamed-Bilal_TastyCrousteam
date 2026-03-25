@@ -20,7 +20,7 @@ from pystk2_gymnasium.envs import STKRaceMultiEnv, AgentSpec
 from pystk2_gymnasium.definitions import CameraMode
 
 MAX_TEAMS = 1 # 1 team max (Agent7)
-MAX_STEPS = 200 # On baisse le pas de temps a 200
+MAX_STEPS = 1000 # On baisse le pas de temps a 200
 NB_RACES = 1
 
 # Get the current timestamp
