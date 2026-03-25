@@ -20,7 +20,7 @@ from pystk2_gymnasium.envs import STKRaceMultiEnv, AgentSpec
 from pystk2_gymnasium.definitions import CameraMode
 
 MAX_TEAMS = 1 # 1 team max (Agent7)
-MAX_STEPS = 1000
+MAX_STEPS = 200 # On baisse le pas de temps a 200
 NB_RACES = 1
 
 # Get the current timestamp
@@ -150,7 +150,7 @@ def single_race(env, agents, names, scores):
     for i in range(MAX_TEAMS):
         scores.append(names[i], pos_avg[i], pos_std[i], dist_avg[i], dist_std[i])
         agents[i].isEnd = False
-    print("race duration:", steps)
+    print("Nombre de pas de temps écoulés:", steps) #Affichage du nombre de pas de temps écoulés
 
 def main_loop():
     scores = Scores()
