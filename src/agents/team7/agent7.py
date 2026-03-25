@@ -11,7 +11,7 @@ class Agent7(KartAgent):
         self.agent_positions = []
         self.obs = None
         self.isEnd = False
-        self.name = "Team7" # replace with your chosen name
+        self.name = "Kadri Mohamed-Bilal" # replace with your chosen name
 
     def reset(self):
         self.obs, _ = self.env.reset()
@@ -19,17 +19,27 @@ class Agent7(KartAgent):
 
     def endOfTrack(self):
         return self.isEnd
-
+        
+    
+    def moove_forward(self, obs, action):
+    	steer = action["steer"]
+    	center = obs["paths_end"][2]
+    	if (center[2] > 30 and abs(obs["center_path_distance"]) < 3):
+    		steer = 0
+    	elif abs(center[0]) > 0.6:
+    		steer += 0.6*center[0]
+    	action["steer"] = np.clip(steer, -1, 1)
+    	return action
+    	    	
     def choose_action(self, obs):
-        acceleration = random.random()
-        steering = random.random()
         action = {
-            "acceleration": acceleration,
-            "steer": steering,
+            "acceleration": 0.5,
+            "steer": 0,
             "brake": False, # bool(random.getrandbits(1)),
             "drift": bool(random.getrandbits(1)),
             "nitro": bool(random.getrandbits(1)),
             "rescue":bool(random.getrandbits(1)),
             "fire": bool(random.getrandbits(1)),
         }
-        return action
+        moove_action = self.moove_forward(obs, action)
+        return moove_action
